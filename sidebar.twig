@@ -1,0 +1,32 @@
+<div id="sidebar">
+    {% if not wp.dynamic_sidebar("Sidebar Widgets") %}
+
+    {{ wp.get_search_form }}
+
+    <h2>Pages</h2>
+    <ul>
+        {{ wp.wp_get_archives('type="monthly"')}}
+    </ul>
+    <h2>Categories</h2>
+    <ul>
+        {{ wp.wp_list_categories('show_count=1&title_li=') }}
+    </ul>
+
+    {{ wp.wp_list_bookmarks() }}
+
+    <h2>Meta</h2>
+    <ul>
+        {{ wp.wp_register }}
+        <li> {{ wp.wp_loginout }}</li>
+        <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress</a></li>
+        {{ wp.wp_meta }}
+    </ul>
+
+    <h2>Subscribe</h2>
+    <ul>
+        <li><a href="<?php bloginfo('rss2_url'); ?>">Entries (RSS)</a></li>
+        <li><a href="<?php bloginfo('comments_rss2_url'); ?>">Comments (RSS)</a></li>
+    </ul>
+
+    {% endif %}
+</div>

@@ -1,0 +1,5 @@
+<div class="meta">
+    <em>Posted on:</em> {{ post.post_date }}
+    <em>by</em> {{ wp.get_userdata(post.post_author).user_login }}
+    <em>Comments count: </em>{{ post.comment_count }}
+</div>

@@ -1,0 +1,10 @@
+<div id="post-{{ post.ID }}">
+    <h2>{{ post.post_title }}</h2>
+    {% include "meta.twig" %}
+    <div class="entry">
+        {{ post.post_content }}
+    </div>
+    {{ wp.edit_post_link('Edit this entry','','.') }}
+</div>
+{% include "sidebar.twig" %}
+

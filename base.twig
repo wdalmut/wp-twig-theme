@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta charset="{{ wp.bloginfo('charset') }}" />
+            <link rel="profile" href="http://gmpg.org/xfn/11" />
+            <link rel="stylesheet" href="{{ wp.get_stylesheet_uri() }}" type="text/css" media="screen" />
+            <link rel="pingback" href="{{ wp.bloginfo('pingback_url') }}" />
+            {% if wp.is_singular and wp.get_option("thread_comments") and wp.wp_enqueue_script("comment-reply") %}
+            {{ wp.wp_head() }}
+            {% endif %}
+            <title>{% block title %}{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        {% block sidebar %}{% include sidebar.twig %}{% endblock %}
+        {% endblock %}
+    </body>
+</html>
