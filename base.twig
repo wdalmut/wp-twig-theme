@@ -9,7 +9,7 @@
             {% if wp.is_singular and wp.get_option("thread_comments") and wp.wp_enqueue_script("comment-reply") %}
             {{ wp.wp_head() }}
             {% endif %}
-            <title>{% block title %}{% endblock %}</title>
+            <title>{% block title %} {{ wp.bloginfo('name') }} {% endblock %}</title>
         {% endblock %}
     </head>
     <body>

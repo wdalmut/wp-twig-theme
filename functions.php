@@ -4,6 +4,7 @@ require_once __DIR__ . '/TwigProxy.php';
 
 add_filter("home_template", function(){ return "home.twig"; });
 add_filter("single_template", function(){ return "single.twig"; });
+add_filter("404_template", function(){ return "404.twig"; });
 
 /**
  *
