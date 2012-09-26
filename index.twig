@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div>
+<div class="body_content">
 {% for post in posts %}
     <h2><a href="{{ post.guid }}">{{post.post_title}}</a></h2>
     {% include "meta.twig" %}
@@ -20,6 +20,4 @@
     <h2>Not found</h2>
 {% endfor %}
 </div>
-
-{% include "sidebar.twig" %}
 {% endblock %}

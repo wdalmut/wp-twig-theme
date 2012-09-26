@@ -50,7 +50,9 @@ code, tt { }
 #meta { }
 .postmetadata { }
 
-#sidebar { }
+/* The only extra rule... */
+.body_content {float:left; width:600px;}
+#sidebar {float:right}
 
 .navgation { }
    .next-posts { }
@@ -132,5 +134,6 @@ caption { background: #fff; margin-bottom: 2em; text-align: left; }
 thead { display: table-header-group; }
 tr { page-break-inside: avoid; } 
 a { text-decoration: none; color: black; }
+
 	
 } /* END print media */
