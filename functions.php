@@ -5,6 +5,9 @@ require_once __DIR__ . '/TwigProxy.php';
 add_filter("home_template", function(){ return "home.twig"; });
 add_filter("single_template", function(){ return "single.twig"; });
 
+/**
+ *
+ */
 add_action("template_include", function ($filename) {
     $wp = new TwigProxy();
 
