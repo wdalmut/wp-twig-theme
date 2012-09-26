@@ -2,8 +2,10 @@
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/TwigProxy.php';
 
-function twig_template($filename)
-{
+add_filter("home_template", function(){ return "home.twig"; });
+add_filter("single_template", function(){ return "single.twig"; });
+
+add_action("template_include", function ($filename) {
     $wp = new TwigProxy();
 
     $loader = new Twig_Loader_Filesystem(dirname(__FILE__));
@@ -18,7 +20,7 @@ function twig_template($filename)
     $template->display(
         array_merge(array('wp' => $wp), get_template_data($filename))
     );
-}
+});
 
 function twig_more($string)
 {
@@ -31,7 +33,7 @@ function get_template_data($filename)
 {
     $data = array();
     switch ($filename) {
-        case 'index.twig':
+        case 'home.twig':
             $data['posts'] = get_posts();
             break;
         case 'single.twig':
