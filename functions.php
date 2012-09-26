@@ -4,7 +4,9 @@ require_once __DIR__ . '/TwigProxy.php';
 
 add_filter("home_template", function(){ return "home.twig"; });
 add_filter("single_template", function(){ return "single.twig"; });
+add_filter("page_template", function(){ return "page.twig"; });
 add_filter("404_template", function(){ return "404.twig"; });
+add_filter("archive_template", function(){ return "archive.twig"; });
 
 /**
  *
@@ -38,7 +40,8 @@ function get_template_data($filename)
     $data = array();
     switch ($filename) {
         case 'home.twig':
-            $data['posts'] = get_posts();
+        case 'archive.twig':
+            $data["posts"] = prepare_posts();
             break;
         case 'single.twig':
             global $post;
@@ -47,6 +50,22 @@ function get_template_data($filename)
     }
 
     return $data;
+}
+
+function prepare_posts()
+{
+    $posts = array();
+    while(have_posts()) {
+        the_post();
+        $post["post_title"] = get_the_title();
+        $post["ID"] = get_the_ID();
+        $post["permalink"] = get_permalink();
+        $post["post_content"] = get_the_content();
+        $post["post_excerpt"] = get_the_excerpt();
+        $post["comment_count"] = get_comments_number('No Responses', 'One Response', '% Responses' );
+        $posts[] = $post;
+    }
+    return $posts;
 }
 
 // Sidebar register

@@ -1,0 +1,5 @@
+{% for comment in post.comments %}
+    <h2 id="comments">{{ post.comment_count }}</h2>
+{% else %}
+    <p>No comments...</p>
+{% endfor %}
