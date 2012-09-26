@@ -2,7 +2,7 @@
     <h2>{{ post.post_title }}</h2>
     {% include "meta.twig" %}
     <div class="entry">
-        {{ post.post_content }}
+        {{ post.post_content|raw }}
     </div>
     {{ wp.edit_post_link('Edit this entry','','.') }}
 </div>

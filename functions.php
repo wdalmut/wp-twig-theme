@@ -10,6 +10,7 @@ function twig_template($filename)
     $twig = new Twig_Environment($loader, array(
                 'cache' => false
             ));
+    $twig->addFilter("more", new Twig_Filter_Function("twig_more"));
     $template = $twig->loadTemplate($filename);
 
     $data = get_template_data($filename);
@@ -17,6 +18,13 @@ function twig_template($filename)
     $template->display(
         array_merge(array('wp' => $wp), get_template_data($filename))
     );
+}
+
+function twig_more($string)
+{
+    return (strpos($string, "<!--more-->")) ?
+        substr($string, 0, strpos($string, "<!--more-->")) :
+        $string;
 }
 
 function get_template_data($filename)
