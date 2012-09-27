@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+if (!class_exists("\Composer\Autoload\ClassLoader")) {
+    require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
 require_once __DIR__ . '/exts/TwigProxy.php';
 
 define ("VIEWS_PATH", __DIR__ . "/views");
