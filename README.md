@@ -2,7 +2,7 @@
 
 Just a simple integration of Twig Template engine with WordPress.
 
-![Screenshot](https://raw.github.com/wdalmut/wp-twig/master/screenshot.png)
+![Screenshot](https://raw.github.com/wdalmut/wp-twig-theme/master/screenshot.png)
 
 First of all install dependencies using Composer.
 
