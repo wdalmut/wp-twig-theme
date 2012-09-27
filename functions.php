@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/TwigProxy.php';
+require_once __DIR__ . '/exts/TwigProxy.php';
+
+define ("VIEWS_PATH", __DIR__ . "/views");
 
 add_filter("home_template", function(){ return "home.twig"; });
 add_filter("single_template", function(){ return "single.twig"; });
@@ -14,11 +16,10 @@ add_filter("archive_template", function(){ return "archive.twig"; });
 add_action("template_include", function ($filename) {
     $wp = new TwigProxy();
 
-    $loader = new Twig_Loader_Filesystem(dirname(__FILE__));
+    $loader = new Twig_Loader_Filesystem(VIEWS_PATH);
     $twig = new Twig_Environment($loader, array(
                 'cache' => false
             ));
-    $twig->addFilter("more", new Twig_Filter_Function("twig_more"));
     $template = $twig->loadTemplate($filename);
 
     $data = get_template_data($filename);
@@ -27,13 +28,6 @@ add_action("template_include", function ($filename) {
         array_merge(array('wp' => $wp), get_template_data($filename))
     );
 });
-
-function twig_more($string)
-{
-    return (strpos($string, "<!--more-->")) ?
-        substr($string, 0, strpos($string, "<!--more-->")) :
-        $string;
-}
 
 function get_template_data($filename)
 {
