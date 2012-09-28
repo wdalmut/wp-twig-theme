@@ -14,6 +14,7 @@ add_filter("single_template", function(){ return "single.twig"; });
 add_filter("page_template", function(){ return "page.twig"; });
 add_filter("404_template", function(){ return "404.twig"; });
 add_filter("archive_template", function(){ return "archive.twig"; });
+add_filter("search_template", function() { return "search.twig"; });
 
 /**
  *
@@ -40,6 +41,7 @@ function get_template_data($filename)
     switch ($filename) {
         case 'home.twig':
         case 'archive.twig':
+        case 'search.twig':
             $data["posts"] = prepare_posts();
             break;
         case 'single.twig':
