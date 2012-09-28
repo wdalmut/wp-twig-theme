@@ -4,7 +4,10 @@ if (!class_exists("\Composer\Autoload\ClassLoader")) {
 }
 require_once __DIR__ . '/exts/TwigProxy.php';
 
-define ("VIEWS_PATH", __DIR__ . "/views");
+define("VIEWS_PATH", __DIR__ . "/views");
+// Define CACHE_PATH false to disable template cache.
+//define("CACHE_PATH", __DIR__ . '/cache');
+define("CACHE_PATH", false);
 
 add_filter("home_template", function(){ return "home.twig"; });
 add_filter("single_template", function(){ return "single.twig"; });
@@ -20,7 +23,7 @@ add_action("template_include", function ($filename) {
 
     $loader = new Twig_Loader_Filesystem(VIEWS_PATH);
     $twig = new Twig_Environment($loader, array(
-                'cache' => false
+                'cache' => CACHE_PATH
             ));
     $template = $twig->loadTemplate($filename);
 
@@ -41,6 +44,7 @@ function get_template_data($filename)
             break;
         case 'single.twig':
             global $post;
+            $post->comments = get_comments(array('post_id' => $post->ID, 'status' => 'approved'));
             $data['post'] = $post;
             break;
     }
@@ -58,7 +62,8 @@ function prepare_posts()
         $post["permalink"] = get_permalink();
         $post["post_content"] = get_the_content();
         $post["post_excerpt"] = get_the_excerpt();
-        $post["comment_count"] = get_comments_number('No Responses', 'One Response', '% Responses' );
+        $post["comment_count"] = get_comments_number();
+        $post["post_date"] = get_the_time("F jS, Y");
         $posts[] = $post;
     }
     return $posts;

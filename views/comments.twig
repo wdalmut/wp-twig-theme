@@ -1,5 +1,25 @@
+<h2>
+    {% if post.comment_count == 0 %}
+        No Responses
+    {% elseif post.comment_count == 1 %}
+        One Response
+    {% else %}
+        {{ post.comment_count }} Responses
+    {% endif %}
+</h2>
 {% for comment in post.comments %}
-    <h2 id="comments">{{ post.comment_count }}</h2>
+    <h3>{{ comment.comment_author}}</h3>
+    <p>{{ comment.comment_content|raw }}</p>
 {% else %}
     <p>No comments...</p>
 {% endfor %}
+<h2>{{ wp.comment_form_title( 'Leave a Reply', 'Leave a Reply to %s' ) }}</h2>
+<div id="respond">
+{% if (wp.get_option('comment_registration') and not wp.is_user_logged_in()) %}
+    <p>You must be
+    <a href="{{ wp.wp_login_url(wp.get_permalink()) }}">logged in</a>
+    to post a comment.</p>
+{% else %}
+    Show the form...
+{% endif %}
+</div>
