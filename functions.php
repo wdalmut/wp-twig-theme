@@ -26,13 +26,12 @@ add_action("template_include", function ($filename) {
     $twig = new Twig_Environment($loader, array(
                 'cache' => CACHE_PATH
             ));
+    $twig->addGlobal("wp", $wp);
     $template = $twig->loadTemplate($filename);
 
     $data = get_template_data($filename);
 
-    $template->display(
-        array_merge(array('wp' => $wp), get_template_data($filename))
-    );
+    $template->display(get_template_data($filename));
 });
 
 function get_template_data($filename)
